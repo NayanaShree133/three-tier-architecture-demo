@@ -1,0 +1,30 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: my-eks-cluster
+  region: us-east-1
+
+vpc:
+  subnets:
+    private:
+      us-east-1a:
+        id: subnet-08a7c95af164da08d
+      us-east-1b:
+        id: subnet-04c915aff6e8261b7
+
+nodeGroups:
+  - name: ng-private
+    instanceType: t3.medium
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 3
+    privateNetworking: true
+    securityGroups:
+      attachIDs:
+        - sg-0459a1b960fb19f58
+    iam:
+      withAddonPolicies:
+        albIngress: true
+        ebs: true
+        cloudWatch: true

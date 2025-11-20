@@ -1,0 +1,7 @@
+spec:
+  template:
+    spec:
+      tolerations:
+      - key: "karpenter.sh/do-not-sync-taints"
+        operator: "Exists"
+        effect: "NoSchedule"
